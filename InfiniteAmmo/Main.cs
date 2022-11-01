@@ -3,14 +3,15 @@ using HarmonyLib;
 
 namespace InfiniteAmmo
 {
-    [BepInPlugin(ModName, ModGUID, ModVersion)]
+    [BepInPlugin(ModGUID, ModName, ModVersion)]
     public class Main : BaseUnityPlugin
     {
         public const string ModName = "InfiniteAmmo";
         public const string ModAuthor  = "Septikai";
         public const string ModGUID = "me.septikai.InfiniteAmmo";
-        public const string ModVersion = "1.0.0";
+        public const string ModVersion = "1.1.0";
         internal Harmony Harmony;
+        
         internal void Awake()
         {
             // Creating new harmony instance
@@ -37,8 +38,6 @@ namespace InfiniteAmmo
         [HarmonyPrefix]
         public static bool InfiniteAmmo(Weapon __instance, ref float __result)
         {
-            var playerCount = LobbyController.instance.GetPlayerCount();
-            if (playerCount != 1) return true;
             __result = __instance.maxAmmo;
             return false;
         }
