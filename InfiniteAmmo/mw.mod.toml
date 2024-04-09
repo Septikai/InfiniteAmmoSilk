@@ -1,0 +1,11 @@
+dependencies = []
+incompatibilities = []
+
+[metadata]
+id = "me.septikai.infiniteammo"
+version = "1.3.0"
+title = "InfiniteAmmo"
+authors = [
+    "Septikai"
+]
+game_version = 1.4
