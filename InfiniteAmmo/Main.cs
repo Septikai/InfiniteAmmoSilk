@@ -41,6 +41,7 @@ namespace InfiniteAmmo
     {
         public static bool Prefix(Weapon __instance, ref float __result)
         {
+            if (__instance is DeathCube) return true;
             __result = __instance.maxAmmo;
             return false;
         }
