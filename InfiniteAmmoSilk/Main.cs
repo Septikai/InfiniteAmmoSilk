@@ -12,7 +12,7 @@ namespace InfiniteAmmo
         {
             // your manifest is the mw.mod.toml file
             // use Metadata to access the values you provided in the manifest. Manifest is also available, and provides the other data such as your dependencies and incompats
-            Logger.LogInfo("Loading InfiniteAmmo 1.4.1 by Septikai!");
+            Logger.LogInfo("Loading InfiniteAmmo 1.4.0 by Septikai!");
             
             // this section currently patches any [HarmonyPatch]s you use, like the one named NoMoreLaserCubes below. if you don't patch anything, you can remove these
             // you should keep the logging messages as they help users and developers with debugging
