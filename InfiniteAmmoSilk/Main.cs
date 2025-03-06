@@ -1,38 +1,36 @@
-﻿using HarmonyLib;
-using modweaver.core;
-using UnityEngine;
+﻿using Silk;
+using Logger = Silk.Logger; // Alias for Silk.Logger to Logger
+using HarmonyLib; // Library for runtime method patching
+using UnityEngine; // Unity's core namespace
 
 namespace InfiniteAmmo
 {
-    [ModMainClass]
-    public class Main : Mod
+    [SilkMod("InfiniteAmmo", new[] { "Septikai" }, "1.4.1", "0.4.0", "infinite-ammo-silk")]
+    public class Main : SilkMod
     {
-        public override void Init()
+        public override void Initialize()
         {
             // your manifest is the mw.mod.toml file
             // use Metadata to access the values you provided in the manifest. Manifest is also available, and provides the other data such as your dependencies and incompats
-            Logger.Info("Loading {0} v{1} by {2}!", Metadata.title, Metadata.version,
-                string.Join(", ", Metadata.authors));
+            Logger.LogInfo("Loading InfiniteAmmo 1.4.1 by Septikai!");
             
             // this section currently patches any [HarmonyPatch]s you use, like the one named NoMoreLaserCubes below. if you don't patch anything, you can remove these
             // you should keep the logging messages as they help users and developers with debugging
-            Logger.Debug("Setting up patcher...");
-            Harmony harmony = new Harmony(Metadata.id); 
-            Logger.Debug("Patching...");
+            Logger.LogInfo("Setting up patcher...");
+            Harmony harmony = new Harmony("me.septikai.infiniteammo"); 
+            Logger.LogInfo("Patching...");
             harmony.PatchAll();
+            Logger.LogInfo("Patches applied!");
         }
 
-        public override void Ready()
+        public void Awake()
         {
-            Logger.Info("Loaded {0}!", Metadata.title);
+            Logger.LogInfo("Loaded InfiniteAmmo!");
         }
 
-        public override void OnGUI(ModsMenuPopup ui)
+        public override void Unload()
         {
-            // you can add data to your mods page here
-            // we recommend if you are going to add ui here, put
-            // ui.CreateDivider() first
-            // you'll see why :3
+            Logger.LogInfo("Unloaded InfiniteAmmo!");
         }
     }
 
@@ -50,9 +48,9 @@ namespace InfiniteAmmo
     [HarmonyPatch(typeof(Flare), nameof(Flare.FixedUpdate))]
     internal class InfiniteFlarePatch
     {
-        public static void Prefix(Flare __instance)
+        public static void Prefix(Flare __instance, ref float ____burnsStart)
         {
-            __instance._burnsStart = Time.time + __instance.ammo;
+            ____burnsStart = Time.time + __instance.ammo;
         }
     }
 }
