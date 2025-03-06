@@ -5,7 +5,7 @@ using UnityEngine; // Unity's core namespace
 
 namespace InfiniteAmmo
 {
-    [SilkMod("InfiniteAmmo", new[] { "Septikai" }, "1.4.1", "0.4.0", "infinite-ammo-silk")]
+    [SilkMod("InfiniteAmmo", new[] { "Septikai" }, "1.4.0", "0.4.0", "infinite-ammo-silk")]
     public class Main : SilkMod
     {
         public override void Initialize()
